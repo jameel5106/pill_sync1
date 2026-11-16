@@ -51,8 +51,15 @@ jobs:
 
       - name: Sync Capacitor Android project
         run: |
-          if [ ! -d android ]; then
+          if [ ! -f android/gradlew ]; then
+            if [ -f android/app/src/main/AndroidManifest.xml ]; then
+              cp android/app/src/main/AndroidManifest.xml /tmp/AndroidManifest.backup.xml
+            fi
+            rm -rf android
             npx cap add android
+            if [ -f /tmp/AndroidManifest.backup.xml ]; then
+              cp /tmp/AndroidManifest.backup.xml android/app/src/main/AndroidManifest.xml
+            fi
           fi
           npx cap sync android
 
