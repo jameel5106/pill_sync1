@@ -1,0 +1,143 @@
+{
+  "@@locale": "en",
+  "appName": "PillSync",
+  "appTagline": "Doctor's Prescriptions, Simplified in Your Language",
+  
+  "selectLanguage": "Select Your Language",
+  "selectLanguageSubtitle": "You can change this at any time in Settings",
+  "continueButton": "Continue",
+  
+  "loginTitle": "Welcome Back",
+  "loginSubtitle": "Access your prescriptions and medication reminders securely",
+  "emailLabel": "Email Address",
+  "emailHint": "name@example.com",
+  "passwordLabel": "Password",
+  "passwordHint": "Enter your password",
+  "forgotPassword": "Forgot password?",
+  "loginButton": "Sign In",
+  "loginWithPhone": "Sign in with Phone Number",
+  "loginWithEmail": "Sign in with Email",
+  "dontHaveAccount": "Don't have an account?",
+  "signUp": "Sign Up",
+  
+  "phoneLabel": "Phone Number",
+  "phoneHint": "Enter 10-digit mobile number",
+  "sendOtp": "Send Verification Code",
+  "enterOtpTitle": "Verify Phone Number",
+  "enterOtpSubtitle": "We sent a 6-digit verification code to {phone}",
+  "@enterOtpSubtitle": {
+    "placeholders": {
+      "phone": { "type": "String" }
+    }
+  },
+  "resendCodeIn": "Resend code in {seconds}s",
+  "@resendCodeIn": {
+    "placeholders": {
+      "seconds": { "type": "int" }
+    }
+  },
+  "resendOtp": "Resend Code",
+  "verifyAndProceed": "Verify & Proceed",
+  
+  "signUpTitle": "Create Account",
+  "signUpSubtitle": "Your confidential healthcare prescription companion",
+  "fullNameLabel": "Full Name",
+  "fullNameHint": "Dr. or Patient Name",
+  "confirmPasswordLabel": "Confirm Password",
+  "confirmPasswordHint": "Re-enter your password",
+  "passwordStrengthWeak": "Weak password",
+  "passwordStrengthMedium": "Fair password",
+  "passwordStrengthStrong": "Strong password",
+  
+  "dpdpConsentCheckbox": "I consent to PillSync processing my prescription data in accordance with the Digital Personal Data Protection (DPDP) Act 2023.",
+  "privacyPolicyLink": "Privacy Policy",
+  "termsOfServiceLink": "Terms of Service",
+  
+  "securitySetupTitle": "Enhance Security",
+  "securitySetupSubtitle": "Protect your prescription details with biometric unlock or a secure PIN",
+  "enableBiometrics": "Enable Biometric Unlock (Face / Fingerprint)",
+  "setPinCode": "Set 4-Digit Security PIN",
+  "enterPin": "Enter 4-Digit PIN",
+  "confirmPin": "Confirm 4-Digit PIN",
+  "skipForNow": "Skip for now",
+  "saveSecuritySettings": "Secure My Account",
+  
+  "appLockedTitle": "PillSync Locked",
+  "appLockedSubtitle": "For your medical data privacy, verify your identity to continue",
+  "unlockWithBiometrics": "Unlock with Biometrics",
+  "unlockWithPin": "Unlock with PIN",
+  "logoutFallback": "Log out from this device",
+  
+  "homeWelcome": "Welcome back, {name}",
+  "@homeWelcome": {
+    "placeholders": {
+      "name": { "type": "String" }
+    }
+  },
+  "homeSubtitle": "Prescription scanner & schedule engine ready for next step.",
+  "logout": "Log Out",
+  "deleteAccountTitle": "Delete Account & All Data",
+  "deleteAccountWarning": "Under the DPDP Act 2023, this will permanently erase your profile, prescriptions, medication reminders, and secure credentials from our servers. This action cannot be reversed.",
+  "deleteAccountConfirm": "Yes, permanently delete my account",
+  "cancel": "Cancel",
+  
+  "offlineBannerMessage": "You are currently offline. Prescriptions and schedules are stored securely on-device.",
+  "accountLockedOut": "Account temporarily locked due to 5 consecutive failed attempts. Please wait 15 minutes before retrying.",
+  "invalidCredentials": "The email or password you entered is incorrect.",
+  "fieldRequired": "This field is required",
+  "invalidEmail": "Please enter a valid email address",
+  "invalidPhone": "Please enter a valid 10-digit phone number",
+  "passwordsDoNotMatch": "Passwords do not match",
+  "consentRequired": "You must accept the DPDP data consent to proceed",
+
+  "navHome": "Home",
+  "navMedicines": "Medicines",
+  "navScan": "Scan",
+  "navReminders": "Reminders",
+  "navSettings": "Settings",
+
+  "greetingMorning": "Good morning",
+  "greetingAfternoon": "Good afternoon",
+  "greetingEvening": "Good evening",
+  "todaysMedicinesTitle": "Today's Medicines",
+  "todaysMedicinesEmpty": "No medicines scheduled for today. Scan a prescription to start your automated dosage schedule.",
+  "upcomingRemindersTitle": "Upcoming Reminders",
+  "upcomingRemindersEmpty": "All caught up! Next medication alert will appear here.",
+  "activeCoursesTitle": "Active Courses",
+  "activeCoursesEmpty": "No active treatment courses. Prescriptions you scan will appear here.",
+  "scanPrescriptionBtn": "Scan a Prescription",
+  "medicalDisclaimerFooter": "PillSync is an assistant, not a doctor. Always confirm with your doctor or pharmacist.",
+
+  "captureTitle": "Capture Prescription",
+  "sourceCamera": "Take Photo",
+  "sourceGallery": "Choose from Gallery",
+  "sourcePdf": "Import PDF Document",
+  "captureHelp": "Place the prescription flat under good lighting. Ensure all medicine names and dosages are clearly visible.",
+  "qualityCheckTitle": "Quality Inspection",
+  "qualityCheckPass": "Image quality is sharp and well-lit. Ready for translation.",
+  "warnBlurry": "Image appears blurry. Doctor's handwriting may be difficult to transcribe.",
+  "warnDark": "Image appears too dark or shaded. Details might be obscured.",
+  "warnLowRes": "Image resolution is low. High clarity is recommended for safe translation.",
+  "retakeButton": "Retake Photo",
+  "proceedAnyway": "Use This Photo",
+  "metadataTitle": "Prescription Details",
+  "whoIsThisFor": "Who is this for?",
+  "defaultProfileMe": "Me",
+  "addProfile": "+ Add Profile",
+  "doctorNameLabel": "Doctor Name (Optional)",
+  "doctorNameHint": "e.g. Dr. Rajesh Sharma",
+  "prescriptionDateLabel": "Prescription Date",
+  "uploadingTitle": "Saving Prescription",
+  "uploadingProgress": "Uploading image securely to your private vault...",
+  "savedOffline": "Saved locally. Will upload when you're online.",
+  "uploadFailedRetry": "Upload failed. Tap to retry.",
+  "statusUploaded": "Uploaded",
+  "statusNeedsReview": "Needs Review",
+  "statusConfirmed": "Confirmed",
+  "deletePrescriptionTitle": "Delete Prescription",
+  "deletePrescriptionMsg": "Are you sure you want to delete this prescription? The image and all extracted dosage schedules will be permanently erased.",
+  "permissionCameraRequired": "Camera Permission Required",
+  "permissionCameraDesc": "PillSync needs camera access to photograph doctor prescriptions and transcribe dosages safely.",
+  "openSettings": "Open Settings",
+  "fileTooLarge": "File exceeds the 10 MB limit. Please select a smaller photo or document."
+}

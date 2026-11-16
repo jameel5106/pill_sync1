@@ -1,11 +1,120 @@
-<div align="center">
+# PillSync — Prescription Translator & Health Companion
 
-<img width="1200" height="475" alt="GHBanner" src="https://github.com/user-attachments/assets/0aa67016-6eaf-458a-adb2-6e31a0763ed6" />
+AI-powered handwritten doctor prescription reader, 7-language Indian prescription translator, meal-synchronized smart medication reminders, and DPDP Act 2023 compliant local-first health vault.
 
-  <h1>Built with AI Studio</h2>
+Includes both the **Full-Stack React + Express Web/PWA App** and the **Flutter Mobile Architecture** (`flutter_project/`).
 
-  <p>The fastest path from prompt to production with Gemini.</p>
+---
 
-  <a href="https://aistudio.google.com/apps">Start building</a>
+## Key Features
 
-</div>
+- **Handwritten Prescription OCR (Gemini AI)**: Server-side `/api/parse-prescription` pipeline with image quality inspection (blur, brightness, resolution), HEIC & PDF first-page import, and safety-first review confirmation.
+- **7 Indian Languages + RTL Support**: Instant patient-friendly instructions and medicine name transliteration across **English**, **Hindi (हिन्दी)**, **Urdu (اردو — RTL)**, **Telugu (తెలుగు)**, **Bengali (বাংলা)**, **Marathi (मराठी)**, and **Tamil (தமிழ்)**.
+- **Meal-Synchronized Smart Reminders**: Deterministic schedule builder tied to breakfast, lunch, dinner, and bedtime with snooze, skip, 10-second undo, course completion advisories, and Service Worker notifications.
+- **Offline-First & Encrypted Storage**: Local IndexedDB persistence with Web Crypto encryption for prescription images and offline scan queueing that auto-syncs when online.
+- **DPDP Act 2023 Compliance**: Explicit consent capture, JSON health record export, and one-tap permanent data erasure.
+- **Flutter Mobile Source (`flutter_project/`)**: Clean Riverpod + `go_router` + Firebase Auth/Firestore + PBKDF2 PIN lock architecture with ARB catalogs for all 7 languages.
+
+---
+
+## Tech Stack
+
+- **Frontend**: React 19, TypeScript, Vite 8, Tailwind CSS v4, Lucide Icons, Noto Sans / Nastaliq fonts
+- **Backend**: Node.js, Express, `@google/genai` SDK (`server.ts`)
+- **PWA & Offline**: Service Worker (`public/sw.js`), Web App Manifest, IndexedDB, `pdfjs-dist`, `heic2any`, `jspdf`, `jszip`
+- **Mobile Companion**: Flutter 3, Riverpod, `go_router`, Firebase (`flutter_project/`)
+
+---
+
+## Getting Started (Local & GitHub Clone)
+
+### Prerequisites
+
+- **Node.js** 20+ and **npm**
+- A **Gemini API Key** from Google AI Studio
+
+### 1. Clone the repository
+
+```bash
+git clone https://github.com/<your-username>/pillsync.git
+cd pillsync
+```
+
+### 2. Install dependencies
+
+```bash
+npm install
+```
+
+### 3. Configure environment variables
+
+Copy `.env.example` to `.env` and add your Gemini API key:
+
+```bash
+cp .env.example .env
+```
+
+Edit `.env`:
+
+```env
+GEMINI_API_KEY="your_gemini_api_key_here"
+APP_URL="http://localhost:3000"
+```
+
+> **Security note**: Never commit `.env` to GitHub. It is already ignored in `.gitignore`.
+
+### 4. Run in development
+
+```bash
+npm run dev
+```
+
+The Express + Vite server will start on `http://localhost:3000`.
+
+### 5. Build, lint, and test
+
+```bash
+npm run lint
+npm test
+npm run build
+```
+
+---
+
+## Project Structure
+
+```text
+.
+├── .github/workflows/ci.yml   # GitHub Actions CI (lint, test, build)
+├── .env.example               # Environment variable template
+├── .gitignore                 # Excludes node_modules, dist, .env, build artifacts
+├── server.ts                  # Express server, Gemini OCR/translation API & GitHub ZIP export
+├── index.html                 # App entry HTML & PWA metadata
+├── public/                    # Manifest, Service Worker & app icons
+├── src/
+│   ├── components/            # React UI screens & modals
+│   ├── config/                # Medicine forms & configuration
+│   ├── data/                  # Translations, drug timing reference & Flutter catalog
+│   ├── services/              # IndexedDB, crypto, OCR client, scheduler & PDF export
+│   ├── translations/          # Multilingual glossary & tests
+│   └── utils/                 # Frequency & review helpers
+└── flutter_project/           # Complete Flutter mobile app source & l10n ARB files
+```
+
+---
+
+## Flutter Mobile App (`flutter_project/`)
+
+See [`flutter_project/README.md`](./flutter_project/README.md) for Firebase setup, Android/iOS camera & biometric permissions, and `flutter run` instructions.
+
+---
+
+## Medical Disclaimer
+
+PillSync is a prescription reading and medication reminder assistant, **not a doctor**. Always verify transcribed medicine names, strengths, and dosage instructions with your doctor or pharmacist.
+
+---
+
+## License
+
+MIT License — see [`LICENSE`](./LICENSE).

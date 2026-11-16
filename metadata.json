@@ -1,0 +1,8 @@
+{
+  "name": "Remix PillSync - Prescription Translator \u0026 Health Companion",
+  "description": "Production Flutter architecture \u0026 interactive simulator for PillSync: AI handwritten doctor prescription reader, Indian language translation, smart reminders, and DPDP Act 2023 data-protected auth layer.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}

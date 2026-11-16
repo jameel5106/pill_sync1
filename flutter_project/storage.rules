@@ -1,0 +1,26 @@
+rules_version = '2';
+service firebase.storage {
+  match /b/{bucket}/o {
+    
+    // PillSync Prescription Storage Rules
+    // Strict isolation under DPDP Act 2023:
+    // Only the authenticated patient/owner can upload, view, or delete their prescription images.
+    
+    match /users/{userId}/prescriptions/{rxId} {
+      // Must be authenticated and UID must match folder path
+      allow read, delete: if request.auth != null && request.auth.uid == userId;
+      
+      // Upload: max 10MB, must be image or PDF format
+      allow write: if request.auth != null 
+                   && request.auth.uid == userId
+                   && request.resource.size < 10 * 1024 * 1024
+                   && (request.resource.contentType.matches('image/.*') 
+                       || request.resource.contentType == 'application/pdf');
+    }
+    
+    // Deny all other access
+    match /{allPaths=**} {
+      allow read, write: if false;
+    }
+  }
+}

@@ -1,0 +1,53 @@
+@import "tailwindcss";
+
+@keyframes ps-scan-line {
+  0%, 100% {
+    transform: translateY(-4px);
+    opacity: 0.75;
+  }
+  50% {
+    transform: translateY(88px);
+    opacity: 1;
+  }
+}
+
+@keyframes ps-shimmer-ltr {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(220%);
+  }
+}
+
+@keyframes ps-shimmer-rtl {
+  0% {
+    transform: translateX(100%);
+  }
+  100% {
+    transform: translateX(-220%);
+  }
+}
+
+.animate-ps-scan {
+  animation: ps-scan-line 2.2s ease-in-out infinite;
+  will-change: transform, opacity;
+}
+
+.animate-ps-shimmer-ltr {
+  animation: ps-shimmer-ltr 1.6s linear infinite;
+  will-change: transform;
+}
+
+.animate-ps-shimmer-rtl {
+  animation: ps-shimmer-rtl 1.6s linear infinite;
+  will-change: transform;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-ps-scan,
+  .animate-ps-shimmer-ltr,
+  .animate-ps-shimmer-rtl {
+    animation: none !important;
+  }
+}

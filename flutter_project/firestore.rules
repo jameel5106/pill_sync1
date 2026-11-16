@@ -1,0 +1,24 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    
+    // PillSync Security Rules - Strictly enforces user-scoped data access
+    // Under India's Digital Personal Data Protection (DPDP) Act 2023,
+    // users have strict ownership over their medical prescriptions, schedules, and profile.
+    
+    match /users/{userId} {
+      // User document (consent, profile, security settings)
+      allow read, write, delete: if request.auth != null && request.auth.uid == userId;
+      
+      // All nested collections (prescriptions, reminders, schedule, logs)
+      match /{document=**} {
+        allow read, write, delete: if request.auth != null && request.auth.uid == userId;
+      }
+    }
+    
+    // Explicitly deny access to any other document or collection
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}
