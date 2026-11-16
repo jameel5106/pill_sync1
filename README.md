@@ -30,7 +30,7 @@ Includes both the **Full-Stack React + Express Web/PWA App** and the **Flutter M
 
 ### Prerequisites
 
-- **Node.js** 20+ and **npm**
+- **Node.js** 22+ and **npm**
 - A **Gemini API Key** from Google AI Studio
 
 ### 1. Clone the repository
