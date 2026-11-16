@@ -11,9 +11,14 @@
     "preview": "vite preview",
     "clean": "rm -rf dist server.js",
     "lint": "tsc --noEmit",
-    "test": "tsx src/translations/__tests__/translation.test.ts && tsx src/utils/__tests__/reviewMedicine.test.ts && tsx src/services/__tests__/formInference.test.ts && tsx src/services/__tests__/reminderScheduler.test.ts"
+    "test": "tsx src/translations/__tests__/translation.test.ts && tsx src/utils/__tests__/reviewMedicine.test.ts && tsx src/services/__tests__/formInference.test.ts && tsx src/services/__tests__/reminderScheduler.test.ts",
+    "android:sync": "npm run build && npx cap sync android",
+    "android:apk": "npm run android:sync && cd android && ./gradlew assembleDebug"
   },
   "dependencies": {
+    "@capacitor/android": "^8.6.2",
+    "@capacitor/cli": "^8.6.2",
+    "@capacitor/core": "^8.6.2",
     "@fontsource/noto-nastaliq-urdu": "^5.3.0",
     "@fontsource/noto-sans-bengali": "^5.3.0",
     "@fontsource/noto-sans-devanagari": "^5.3.0",

@@ -16,6 +16,7 @@ import {
   X,
 } from 'lucide-react';
 import { FLUTTER_FILE_CONTENTS } from '../data/flutterFileContents';
+import { apiUrl } from '../config/apiConfig';
 
 export type GitHubExportTarget = 'full' | 'web' | 'flutter';
 
@@ -55,7 +56,7 @@ export const GitHubExportModal: React.FC<GitHubExportModalProps> = ({ isOpen, on
     setManifestLoading(true);
     setDownloadError(null);
 
-    fetch(`/api/export-github-manifest?target=${target}`)
+    fetch(apiUrl(`/api/export-github-manifest?target=${target}`))
       .then(async (res) => {
         if (!res.ok) throw new Error('Manifest unavailable');
         return res.json();
@@ -146,7 +147,7 @@ export const GitHubExportModal: React.FC<GitHubExportModalProps> = ({ isOpen, on
     };
 
     try {
-      const response = await fetch(`/api/export-github-zip?target=${target}`);
+      const response = await fetch(apiUrl(`/api/export-github-zip?target=${target}`));
       if (!response.ok) {
         throw new Error(`Export failed (${response.status})`);
       }

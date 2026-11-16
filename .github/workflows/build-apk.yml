@@ -1,0 +1,78 @@
+name: Build Android APK
+
+on:
+  push:
+    branches: [main, master]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build-apk:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Setup Java 21
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '21'
+
+      - name: Setup Gradle
+        uses: gradle/actions/setup-gradle@v4
+
+      - name: Install dependencies
+        run: |
+          if [ -f package-lock.json ]; then
+            npm ci --legacy-peer-deps
+          else
+            npm install --legacy-peer-deps
+          fi
+
+      - name: Build PillSync web bundle
+        run: npm run build
+
+      - name: Sync Capacitor Android project
+        run: |
+          if [ ! -d android ]; then
+            npx cap add android
+          fi
+          npx cap sync android
+
+      - name: Build Debug APK
+        working-directory: android
+        run: |
+          chmod +x gradlew
+          ./gradlew assembleDebug --no-daemon
+
+      - name: Prepare PillSync.apk
+        run: cp android/app/build/outputs/apk/debug/app-debug.apk PillSync.apk
+
+      - name: Upload PillSync.apk to Actions Artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: PillSync-Android-APK
+          path: PillSync.apk
+          retention-days: 30
+
+      - name: Publish PillSync.apk to GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: apk-latest
+          name: PillSync Android APK (Latest)
+          body: |
+            Download **PillSync.apk** below to install PillSync on your Android phone.
+            - Package ID: `com.pillsync.app`
+            - Built automatically from `main` via Capacitor + Android Gradle.
+          files: PillSync.apk
+          prerelease: false
+          make_latest: true

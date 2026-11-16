@@ -6,6 +6,7 @@
 
 import { inferFormFromPrescription } from './formInference';
 import { isFoodTimingApplicable } from '../config/medicineForms';
+import { apiUrl } from '../config/apiConfig';
 
 export type PrescriptionFlag =
   | 'name_uncertain'
@@ -145,7 +146,7 @@ function sendXhrParseRequest(
     }
 
     const xhr = new XMLHttpRequest();
-    xhr.open('POST', '/api/parse-prescription', true);
+    xhr.open('POST', apiUrl('/api/parse-prescription'), true);
     xhr.setRequestHeader('Content-Type', 'application/json');
     xhr.timeout = timeoutMs;
 
@@ -312,7 +313,7 @@ export async function suggestFoodTimingWithGemini(
 ): Promise<string | null> {
   if (typeof navigator !== 'undefined' && !navigator.onLine) return null;
   try {
-    const res = await fetch('/api/suggest-food-timing', {
+    const res = await fetch(apiUrl('/api/suggest-food-timing'), {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       signal,

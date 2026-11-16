@@ -10,6 +10,7 @@ import {
 } from './sentenceBuilder';
 import { SUPPORTED_LANGUAGES } from '../data/translations';
 import { formatReviewAfterNDays, toSupportedLang } from '../translations/glossary';
+import { apiUrl } from '../config/apiConfig';
 
 export interface MedicineTranslationResult {
   medicineId: string;
@@ -268,7 +269,7 @@ class TranslationService {
         }
       }
 
-      const response = await fetch('/api/translate', {
+      const response = await fetch(apiUrl('/api/translate'), {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         signal: controller.signal,

@@ -38,6 +38,7 @@ import {
   X,
   Languages,
   GitBranch,
+  Smartphone,
 } from 'lucide-react';
 import {
   UserAccount,
@@ -99,6 +100,7 @@ import { ManualMedicineModal } from './ManualMedicineModal';
 import { InstallPwaModal } from './InstallPwaModal';
 import { StorageOfflineModal } from './StorageOfflineModal';
 import { GitHubExportModal } from './GitHubExportModal';
+import { AndroidApkModal } from './AndroidApkModal';
 import { PrescriptionTranslationView } from './PrescriptionTranslationView';
 import {
   HonestProgressScreen,
@@ -194,10 +196,11 @@ export const RealPillSyncApp: React.FC = () => {
   // Manual Medicine Entry Modal
   const [showManualEntryModal, setShowManualEntryModal] = useState(false);
 
-  // PWA, Storage & GitHub Export Modals
+  // PWA, Storage, GitHub Export & Android APK Modals
   const [showInstallModal, setShowInstallModal] = useState(false);
   const [showStorageModal, setShowStorageModal] = useState(false);
   const [showGitHubExportModal, setShowGitHubExportModal] = useState(false);
+  const [showAndroidApkModal, setShowAndroidApkModal] = useState(false);
 
   // Offline Health Assistant Drawer
   const [showAssistantModal, setShowAssistantModal] = useState(false);
@@ -1987,14 +1990,24 @@ export const RealPillSyncApp: React.FC = () => {
                 {t('signUp')}
               </button>
             </div>
-            <button
-              type="button"
-              onClick={() => setShowGitHubExportModal(true)}
-              className="mx-auto px-3 py-1.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 text-[11px] font-semibold inline-flex items-center gap-1.5 transition-colors"
-            >
-              <GitBranch className="w-3.5 h-3.5 text-slate-700" />
-              <span>Download Source for GitHub</span>
-            </button>
+            <div className="flex items-center justify-center gap-2 flex-wrap">
+              <button
+                type="button"
+                onClick={() => setShowGitHubExportModal(true)}
+                className="px-3 py-1.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 text-[11px] font-semibold inline-flex items-center gap-1.5 transition-colors"
+              >
+                <GitBranch className="w-3.5 h-3.5 text-slate-700" />
+                <span>Download Source for GitHub</span>
+              </button>
+              <button
+                type="button"
+                onClick={() => setShowAndroidApkModal(true)}
+                className="px-3 py-1.5 rounded-xl bg-emerald-50 hover:bg-emerald-100 text-[#2E9E6B] text-[11px] font-semibold inline-flex items-center gap-1.5 transition-colors"
+              >
+                <Smartphone className="w-3.5 h-3.5 text-[#2E9E6B]" />
+                <span>Download Android APK</span>
+              </button>
+            </div>
           </div>
         </div>
       )}
@@ -2768,7 +2781,28 @@ export const RealPillSyncApp: React.FC = () => {
                   Download &amp; Export to GitHub
                 </span>
                 <span className="text-[11px] text-slate-500">
-                  Download clean repo ZIP (Web + Flutter + CI)
+                  Download clean repo ZIP (Web + Android + Flutter + CI)
+                </span>
+              </div>
+            </div>
+            <ChevronRight className="w-4 h-4 text-slate-400" />
+          </button>
+
+          {/* Download Android APK Card */}
+          <button
+            onClick={() => setShowAndroidApkModal(true)}
+            className="w-full p-3.5 bg-white border border-slate-200 rounded-2xl shadow-xs flex items-center justify-between text-left hover:bg-slate-50 transition-colors"
+          >
+            <div className="flex items-center gap-3">
+              <div className="w-8 h-8 rounded-xl bg-emerald-50 text-[#2E9E6B] flex items-center justify-center">
+                <Smartphone className="w-4 h-4" />
+              </div>
+              <div>
+                <span className="text-xs font-bold text-slate-900 block">
+                  Download Android APK
+                </span>
+                <span className="text-[11px] text-slate-500">
+                  Build &amp; download PillSync.apk via GitHub Actions or Gradle
                 </span>
               </div>
             </div>
@@ -3313,6 +3347,13 @@ export const RealPillSyncApp: React.FC = () => {
       <GitHubExportModal
         isOpen={showGitHubExportModal}
         onClose={() => setShowGitHubExportModal(false)}
+      />
+
+      {/* ANDROID APK DOWNLOAD & BUILDER MODAL */}
+      <AndroidApkModal
+        isOpen={showAndroidApkModal}
+        onClose={() => setShowAndroidApkModal(false)}
+        onOpenInstallPwa={() => setShowInstallModal(true)}
       />
 
       {/* OFFLINE HEALTH ASSISTANT MODAL */}

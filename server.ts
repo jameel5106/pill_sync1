@@ -19,6 +19,26 @@ const PORT = process.env.PORT ? parseInt(process.env.PORT, 10) : 3000;
 app.use(express.json({ limit: '20mb' }));
 app.use(express.urlencoded({ extended: true, limit: '20mb' }));
 
+// Allow Capacitor Android/iOS WebView origins to reach /api/* when packaged as an APK
+app.use('/api', (req: Request, res: Response, next) => {
+  const origin = req.headers.origin;
+  if (
+    origin === 'https://localhost' ||
+    origin === 'http://localhost' ||
+    origin === 'capacitor://localhost' ||
+    origin?.startsWith('http://localhost:') ||
+    origin?.startsWith('http://127.0.0.1:')
+  ) {
+    res.setHeader('Access-Control-Allow-Origin', origin);
+    res.setHeader('Access-Control-Allow-Methods', 'GET,POST,OPTIONS');
+    res.setHeader('Access-Control-Allow-Headers', 'Content-Type,Authorization');
+  }
+  if (req.method === 'OPTIONS') {
+    return res.sendStatus(204);
+  }
+  next();
+});
+
 function createGeminiClient(apiKey: string) {
   return new GoogleGenAI({
     apiKey,
@@ -591,6 +611,7 @@ const EXCLUDED_DIRS = new Set([
   'coverage',
   '.git',
   '.dart_tool',
+  '.gradle',
   '.idea',
   '.vscode',
   '.aistudio',
@@ -598,7 +619,9 @@ const EXCLUDED_DIRS = new Set([
 
 function shouldExcludeEntry(relPath: string, name: string, isDir: boolean): boolean {
   if (isDir) {
-    return EXCLUDED_DIRS.has(name);
+    if (EXCLUDED_DIRS.has(name)) return true;
+    if (relPath === 'android/app/src/main/assets/public') return true;
+    return false;
   }
   if (name === '.DS_Store' || name === 'Thumbs.db' || name.endsWith('.log') || name.endsWith('.tsbuildinfo')) {
     return true;

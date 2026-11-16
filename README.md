@@ -81,24 +81,45 @@ npm run build
 
 ---
 
+## Android APK Download & Build (`android/`)
+
+### Automatic APK via GitHub Actions & Releases
+Pushing to `main` (or manually triggering the **Build Android APK** workflow under **Actions**) compiles `PillSync.apk` (`com.pillsync.app`) using Capacitor + Android Gradle and publishes it to:
+- **GitHub Releases**: `https://github.com/<your-username>/<your-repo>/releases/download/apk-latest/PillSync.apk`
+- **GitHub Actions Artifacts**: `PillSync-Android-APK`
+
+### Build APK Locally (requires Java 21 & Android SDK)
+```bash
+npm install
+npm run android:apk
+# Output: android/app/build/outputs/apk/debug/app-debug.apk
+```
+
+---
+
 ## Project Structure
 
 ```text
 .
-├── .github/workflows/ci.yml   # GitHub Actions CI (lint, test, build)
+├── .github/workflows/
+│   ├── ci.yml                 # GitHub Actions CI (lint, test, build)
+│   └── build-apk.yml          # Automated Capacitor Android APK builder & Release publisher
 ├── .env.example               # Environment variable template
 ├── .gitignore                 # Excludes node_modules, dist, .env, build artifacts
+├── .npmrc                     # Sets legacy-peer-deps=true for clean npm installs
+├── capacitor.config.ts        # Capacitor config (com.pillsync.app)
+├── android/                   # Native Android Gradle project
 ├── server.ts                  # Express server, Gemini OCR/translation API & GitHub ZIP export
 ├── index.html                 # App entry HTML & PWA metadata
 ├── public/                    # Manifest, Service Worker & app icons
 ├── src/
 │   ├── components/            # React UI screens & modals
-│   ├── config/                # Medicine forms & configuration
+│   ├── config/                # Medicine forms & API base configuration
 │   ├── data/                  # Translations, drug timing reference & Flutter catalog
 │   ├── services/              # IndexedDB, crypto, OCR client, scheduler & PDF export
 │   ├── translations/          # Multilingual glossary & tests
 │   └── utils/                 # Frequency & review helpers
-└── flutter_project/           # Complete Flutter mobile app source & l10n ARB files
+└── flutter_project/           # Flutter mobile architecture & l10n ARB files
 ```
 
 ---
